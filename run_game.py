@@ -1,7 +1,5 @@
 import sys, random
 
-markers = [ 'X', 'O' ]
-
 def create_board():
     return [ None ] * 9
 
@@ -43,9 +41,6 @@ def assign_markers(player):
 
 def repeat_game():
     return raw_input("Do you want to play again? (Yes/No): ").lower().startswith("y")
-    
-def player_input():
-    pass
 
 def make_move(marker, board, index):
     if index < 1 or index > 9:
@@ -60,6 +55,11 @@ def make_move(marker, board, index):
     board[index-1] = marker
     return True
 
+def player_input(player, marker):
+    index = int(raw_input('Player %d. Choose a board position (1-9): ' % (player+1)))
+    while not make_move(marker, board, index):
+        index = int(raw_input('Player %d. Choose a VALID board position: ' % (player+1)))
+    
 def check_game(board, marker):
     '''
     Check whether the player with given marker wins or
@@ -102,10 +102,7 @@ if __name__ == '__main__':
         while not is_full(board) and not any(game_status):
             marker = markers[player]
 
-            index = int(raw_input('Player %d. Choose a board position (1-9): ' % (player+1)))
-            while not make_move(marker, board, index):
-                index = int(raw_input('Player %d. Choose a VALID board position: ' % (player+1)))
-        
+            player_input(player, marker)
             print_board(board)
 
             win, tie = check_game(board, marker)
