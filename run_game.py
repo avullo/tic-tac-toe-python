@@ -71,7 +71,7 @@ def check_game(board, marker):
     
     if { 0, 1, 2 } <= have_marker or { 3, 4, 5} <= have_marker or { 6, 7, 8 } <= have_marker or \
        { 0, 3, 6 } <= have_marker or { 1, 4, 7 } <= have_marker or { 2, 5, 8 } <= have_marker or \
-       { 1, 4, 7 } <= have_marker or { 2, 4, 6 } <= have_marker:
+       { 0, 4, 8 } <= have_marker or { 2, 4, 6 } <= have_marker:
         win = True
 
     if not win and is_full(board):
@@ -127,3 +127,4 @@ if __name__ == '__main__':
                 print 
             game_on = repeat_game()
 
+    print "Bye."
